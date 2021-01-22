@@ -112,7 +112,6 @@ export class Connect4 {
 
     diagonalWin(row, col) {
         let check:number = 1;
-        let checkRev:number = 1;
         let win:boolean = false;
 
         for (let i = 1; i < 4 && win === false; i++) {
@@ -133,11 +132,14 @@ export class Connect4 {
                 }
             }
 
+            //reset check
+            check = 0;
+
             //top-left from current block check
 
             if (!win && col - i >= 0 && row + i < this.rowLen && this.boardCols[col - i][row + i] === this.currentPlayer) {
-                checkRev++;
-                if (checkRev == 4) {
+                check++;
+                if (check == 4) {
                     win = true;
                 }
             }
@@ -145,8 +147,8 @@ export class Connect4 {
             //bottom-right from current block check
 
             if (!win && col + i < this.colLen && row - i >= 0 && this.boardCols[col + i][row - i] === this.currentPlayer) {
-                checkRev++;
-                if (checkRev == 4) {
+                check++;
+                if (check == 4) {
                     win = true;
                 }
             }
